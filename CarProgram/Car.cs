@@ -8,6 +8,7 @@ namespace CarProgram
 {
     internal class Car
     {
+        //Very, very basic declaration of properties
         public string make, model, year, color, hp;
     }
 }
