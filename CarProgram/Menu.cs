@@ -10,7 +10,9 @@ namespace CarProgram
     internal class Menu
     {
         //Creates a new Car List
-        static List<Car> cars = new List<Car>();
+        public static List<Car> cars = new List<Car>();
+
+        public static string carsTableHeader = "year\t\tmake\t\tmodel\t\tcolor\t\thp";
 
         //Manages the main interaction logic. Provides the user with options to choose from to interact with the program
         public static void MainMenu()
@@ -41,6 +43,18 @@ namespace CarProgram
                     break;
                 case "2":
                     ListCars();
+                    Console.WriteLine("Press any key to return to the Main Menu...");
+                    Console.ReadKey(true);
+                    MainMenu();
+                    break;
+                case "3":
+                    FileManager.Save();
+                    Console.WriteLine("Press any key to return to the Main Menu...");
+                    Console.ReadKey(true);
+                    MainMenu();
+                    break;
+                case "4":
+                    FileManager.Load();
                     Console.WriteLine("Press any key to return to the Main Menu...");
                     Console.ReadKey(true);
                     MainMenu();
@@ -90,7 +104,7 @@ namespace CarProgram
             Console.Clear();
 
             // Reaffirms the user about the info provided, and gives them the option to save to the memory the input, or to discard the data
-            Console.WriteLine("You created a {0}, {1}hp {2} {3}", car.color, car.hp, car.make, car.model);
+            Console.WriteLine("You created a {0}, {1}hp {2} {3} {4}", car.color, car.hp, car.year, car.make, car.model);
             Console.WriteLine("");
             Console.WriteLine("You want to save this car? (Y/N)");
 
@@ -120,12 +134,12 @@ namespace CarProgram
             if (cars.Count > 0)
             {
                 // The \t special char is a tab, used to format tables 
-                Console.WriteLine("#\tmake\tmodel\tcolor\thp");
+                Console.WriteLine("#\t\t" + carsTableHeader);
 
                 // Writes a new line in the console for each new 'car' in the List 'cars'
                 foreach (var car in cars)
                 {
-                    Console.WriteLine("{0}.\t{1}\t{2}\t{3}\t{4}", cars.IndexOf(car) + 1, car.make, car.model, car.color, car.hp);
+                    Console.WriteLine("{0}.\t\t{1}\t\t{2}\t\t{3}\t\t{4}\t\t{5}", cars.IndexOf(car) + 1, car.year, car.make, car.model, car.color, car.hp);
                 }
                 Console.WriteLine("");
                 Console.WriteLine("Found {0} cars in the list", cars.Count());
